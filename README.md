@@ -61,7 +61,7 @@ You can set the class path by creating an Ivy module file. Continuing the
 
     <?xml version="1.0"?>
     <ivy-module version="2.0">
-      <info org="jrun" module="hello"/>
+      <info organisation="jrun" module="slf4j"/>
       <dependencies>
         <dependency org="org.slf4j" name="slf4j-api" rev="1.7.25" />
         <dependency org="ch.qos.logback" name="logback-classic" rev="1.2.3" />
