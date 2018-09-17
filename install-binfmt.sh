@@ -1,6 +1,11 @@
 #!/bin/sh
 
-# register krun with binfmt_misc
+if [ ! -d /proc/sys/fs ]; then
+    echo "skipping binfmt_misc" >&2
+    exit
+fi
+
+# register jrun with binfmt_misc
 is_binfmt_misc_ready=$(mount | grep "type binfmt_misc")
 
 # example output of mount command when binfm_misc is already mounted:
