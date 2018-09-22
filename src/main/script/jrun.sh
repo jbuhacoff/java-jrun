@@ -144,11 +144,18 @@ generate_classpath() {
 
     # use ivy to generate the classpath
     if [ -n "$ivyfile" ]; then
-        cat >ivysettings.xml <<EOF
+        cat >ivysettings.xml <<'EOF'
 <ivysettings>
-    <settings defaultResolver="central"/>
+    <settings defaultResolver="default"/>
+    <property name="m2-pattern" value="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" override="false" />
     <resolvers>
-        <ibiblio name="central" m2compatible="true"/>
+        <chain name="default">
+            <filesystem name="local-maven2" m2compatible="true" >
+                <artifact pattern="${m2-pattern}"/>
+                <ivy pattern="${m2-pattern}"/>
+            </filesystem>
+            <ibiblio name="central" m2compatible="true"/>
+        </chain>
     </resolvers>
 </ivysettings>
 EOF
