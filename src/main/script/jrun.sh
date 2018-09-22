@@ -290,4 +290,8 @@ if [ ! -f $JRUN_CACHE/$jsfile_sha256.jar ]; then
 fi
 
 # run the cached jar file
-java -jar $JRUN_CACHE/$jsfile_sha256.jar
+if which cygpath >/dev/null 2>/dev/null; then
+    java -jar $(cygpath -w $JRUN_CACHE/$jsfile_sha256.jar)
+else
+    java -jar $JRUN_CACHE/$jsfile_sha256.jar
+fi
